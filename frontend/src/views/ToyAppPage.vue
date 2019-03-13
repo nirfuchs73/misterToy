@@ -6,6 +6,7 @@
         <!-- <toy-filter class="toy-app-header-item"></toy-filter> -->
         <toy-list v-bind:toys="toyItems" v-on:delete="deleteToy" v-on:edit="editToy"></toy-list>
         <button v-on:click="addToy">Add Toy</button>
+        <user-msg></user-msg>
     </section>
 </template>
 
@@ -24,8 +25,10 @@
 <script>
 // @ is an alias to /src
 // import HelloWorld from "@/components/HelloWorld.vue";
-import ToyList from "@/components/ToyList.vue";
-import ToyFilter from "@/components/ToyFilter.vue";
+import ToyList from "../components/ToyList.vue";
+// import ToyFilter from "@/components/ToyFilter.vue";
+import UserMsg from "../components/UserMsg.vue";
+import EventBusService, { SHOW_MSG } from "../services/EventBusService.js";
 
 export default {
     name: "ToyApp",
@@ -40,7 +43,7 @@ export default {
     },
     computed: {
         toyItems() {
-            return this.$store.getters.filterToyItems;
+            return this.$store.getters.toyItems;
         },
         isToyLoading() {
             return this.$store.getters.isToyLoading;
@@ -82,11 +85,15 @@ export default {
         // },
         addToy() {
             console.log("addToy");
-            var txt = prompt("Toy:");
-            var importance = +prompt("Importance:");
+            var name = prompt("Name:");
+            var price = +prompt("Price:");
+            var type = prompt("Type:");
+            var inStock = prompt("In Stock:");
             var item = this.$store.getters.emptyToyItem;
-            item.txt = txt;
-            item.importance = importance;
+            item.name = name;
+            item.price = price;
+            item.type = type;
+            item.inStock = inStock;
             // this.$store.commit('addItem', { item });
             console.log("Saving ITEM", item);
             this.$store.dispatch({ type: "addItem", item: item }).then(res => {
@@ -100,7 +107,8 @@ export default {
     },
     components: {
         ToyList,
-        ToyFilter
+        UserMsg
+        // ToyFilter
     }
 };
 </script>

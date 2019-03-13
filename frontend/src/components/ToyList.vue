@@ -1,4 +1,3 @@
-// import ToyPreview from './ToyPreview.js';
 <template>
     <!-- <ul class="toy-list">
             <li v-for="toy in toys">
@@ -47,7 +46,7 @@
 
 
 <script>
-import ToyPreview from "@/components/ToyPreview.vue";
+import ToyPreview from "../components/ToyPreview.vue";
 
 export default {
     name: "ToyList",
@@ -70,7 +69,7 @@ export default {
         },
         editToy(toy) {
             this.$emit("edit", toy._id);
-        },
+        }
         // toggleDone(toy) {
         //     this.$emit("toggle-done", toy);
         // }

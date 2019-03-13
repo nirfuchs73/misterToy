@@ -45,8 +45,8 @@ function addItem(item) {
     return axios.post(api, item)
         .then(res => res.data)
         .then(addedToy => {
-            // console.log(addedBug);
-            // bugs.push(addedToy);
+            console.log(addedToy);
+            // toys.push(addedToy);
             return addedToy;
         });
 }
@@ -63,10 +63,10 @@ function updateItem(item) {
 
 function getEmpty() {
     return {
-        id: UtilService.makeId(),
-        txt: '',
-        isDone: false,
+        name: '',
+        price: 0,
+        type: '',
         createdAt: Date.now(),
-        importance: ''
+        inStock: false
     }
 }

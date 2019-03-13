@@ -23,14 +23,14 @@ export default new Vuex.Store({
             state.currItem = toyItem;
         },
         removeItem(state, { itemId }) {
-            const idx = state.toyItems.findIndex(item => item.id === itemId);
+            const idx = state.toyItems.findIndex(item => item._id === itemId);
             state.toyItems.splice(idx, 1);
         },
         addItem(state, { item }) {
-            state.toyItems.unshift(item);
+            state.toyItems.push(item);
         },
         updateItem(state, { item }) {
-            const idx = state.toyItems.findIndex(currItem => currItem.id === item.id);
+            const idx = state.toyItems.findIndex(currItem => currItem._id === item._id);
             state.toyItems.splice(idx, 1, item);
         },
         // setfilterBy(state, filterBy) {
@@ -41,18 +41,21 @@ export default new Vuex.Store({
         }
     },
     getters: {
-        filterToyItems(state) {
-            var toyList = state.toyItems.filter(item => {
-                return item.name.toLowerCase().includes(state.filterBy.text.toLowerCase());
-            });
-            if (state.filterBy.type === 'Active') {
-                toyList = toyList.filter(item => !item.isDone);
-            }
-            if (state.filterBy.type === 'Done') {
-                toyList = toyList.filter(item => item.isDone);
-            }
-            return toyList;
-            // return state.toyItems;
+        // filterToyItems(state) {
+        //     var toyList = state.toyItems.filter(item => {
+        //         return item.name.toLowerCase().includes(state.filterBy.text.toLowerCase());
+        //     });
+        //     if (state.filterBy.type === 'Active') {
+        //         toyList = toyList.filter(item => !item.isDone);
+        //     }
+        //     if (state.filterBy.type === 'Done') {
+        //         toyList = toyList.filter(item => item.isDone);
+        //     }
+        //     return toyList;
+        //     // return state.toyItems;
+        // },
+        toyItems(state) {
+            return state.toyItems;
         },
         doneToysPercent(state) {
             var doneToys = state.toyItems.filter(item => item.isDone);
