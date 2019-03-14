@@ -10,18 +10,6 @@
     </section>
 </template>
 
-<style>
-.toy-wrapper {
-    /* max-width: 100%; */
-    /* padding: 0 0px; */
-    /* margin: 0 auto; */
-    max-width: 1000px;
-    padding: 0 20px;
-    margin: 0 auto;
-}
-</style>
-
-
 <script>
 // @ is an alias to /src
 // import HelloWorld from "@/components/HelloWorld.vue";
@@ -112,3 +100,14 @@ export default {
     }
 };
 </script>
+
+<style>
+.toy-wrapper {
+    /* max-width: 100%; */
+    /* padding: 0 0px; */
+    /* margin: 0 auto; */
+    max-width: 1000px;
+    padding: 0 20px;
+    margin: 0 auto;
+}
+</style>

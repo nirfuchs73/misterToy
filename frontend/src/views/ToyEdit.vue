@@ -14,21 +14,10 @@
                 <option value="false">False</option>
             </select>
             <button type="submit">Save</button>
+            <!-- <user-msg></user-msg> -->
         </form>
-        <user-msg></user-msg>
     </section>
 </template>
-
-<style>
-.flex {
-    display: flex;
-}
-
-.toy-edit {
-    flex-direction: column;
-    width: min-content;
-}
-</style>
 
 <script>
 import UserMsg from "../components/UserMsg.vue";
@@ -67,6 +56,20 @@ export default {
         toy() {
             return JSON.parse(JSON.stringify(this.$store.state.currItem));
         }
+    },
+    components: {
+        UserMsg
     }
 };
 </script>
+
+<style>
+.flex {
+    display: flex;
+}
+
+.toy-edit {
+    flex-direction: column;
+    width: min-content;
+}
+</style>

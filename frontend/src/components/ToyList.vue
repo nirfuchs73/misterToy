@@ -21,30 +21,6 @@
     </section>
 </template>
 
-<style>
-.flex {
-    display: flex;
-}
-.toy-list {
-    flex-direction: column;
-}
-
-.toy-list-row:first-child {
-    border: 1px solid black;
-}
-
-.toy-list-row {
-    justify-content: space-between;
-    border: 1px solid black;
-    border-top-style: none;
-}
-
-.toy-list-preview {
-    margin: 8px;
-}
-</style>
-
-
 <script>
 import ToyPreview from "../components/ToyPreview.vue";
 
@@ -79,3 +55,26 @@ export default {
     }
 };
 </script>
+
+<style>
+.flex {
+    display: flex;
+}
+.toy-list {
+    flex-direction: column;
+}
+
+.toy-list-row:first-child {
+    border: 1px solid black;
+}
+
+.toy-list-row {
+    justify-content: space-between;
+    border: 1px solid black;
+    border-top-style: none;
+}
+
+.toy-list-preview {
+    margin: 8px;
+}
+</style>
