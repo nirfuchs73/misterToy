@@ -2,27 +2,6 @@
     <div v-if="alive" class="alert" :class="alertClass">{{msg.txt}}</div>
 </template>
 
-<style>
-.alert {
-    color: white;
-    padding: 10px;
-    font-size: 1.4em;
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: grey;
-}
-
-.alert-success {
-    background-color: rgb(15, 122, 15);
-}
-
-.alert-danger {
-    background-color: rgb(122, 11, 11);
-}
-</style>
-
-
 <script>
 import EventBusService, { SHOW_MSG } from "../services/EventBusService.js";
 
@@ -51,3 +30,23 @@ export default {
     }
 };
 </script>
+
+<style>
+.alert {
+    color: white;
+    padding: 10px;
+    font-size: 1.4em;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: grey;
+}
+
+.alert-success {
+    background-color: rgb(15, 122, 15);
+}
+
+.alert-danger {
+    background-color: rgb(122, 11, 11);
+}
+</style>
