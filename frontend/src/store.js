@@ -9,8 +9,9 @@ export default new Vuex.Store({
         toyItems: [],
         currItem: null,
         filterBy: {
-            text: '',
-            type: 'All'
+            name: '',
+            type: 'All',
+            inStock: 'All'
         },
         isToyLoading: false,
 
@@ -33,9 +34,9 @@ export default new Vuex.Store({
             const idx = state.toyItems.findIndex(currItem => currItem._id === item._id);
             state.toyItems.splice(idx, 1, item);
         },
-        // setfilterBy(state, filterBy) {
-        //     state.filterBy = filterBy;
-        // },
+        setfilterBy(state, filterBy) {
+            state.filterBy = filterBy;
+        },
         setIsToyLoading(state, { isLoading }) {
             state.isToyLoading = isLoading;
         }
@@ -54,6 +55,9 @@ export default new Vuex.Store({
         //     return toyList;
         //     // return state.toyItems;
         // },
+        filterBy(state) {
+            return state.filterBy;
+        },
         toyItems(state) {
             return state.toyItems;
         },
@@ -69,10 +73,11 @@ export default new Vuex.Store({
         },
     },
     actions: {
-        loadToyItems(context) {
+        loadToyItems(context, { filterQuery }) {
             // console.log('CONTEXT', context);
+            console.log(filterQuery);
             context.commit({ type: 'setIsToyLoading', isLoading: true })
-            return ItemService.query()
+            return ItemService.query(filterQuery)
                 .then(toyItems => {
                     context.commit({ type: 'setToyItems', toyItems })
                 })
@@ -80,6 +85,13 @@ export default new Vuex.Store({
                     context.commit({ type: 'setIsToyLoading', isLoading: false })
                 })
         },
+        // filterToyItems(context, { filterBy }) {
+        //     console.log(filterBy);
+        //     return ItemService.filterBy(filterBy)
+        //         .then(toyItems => {
+        //             context.commit({ type: 'setToyItems', toyItems })
+        //         })
+        // },
         loadToyItem(context, { itemId }) {
             // console.log('CONTEXT', context);
             ItemService.getItemById(itemId)

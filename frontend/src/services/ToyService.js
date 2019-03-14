@@ -5,6 +5,7 @@ import axios from 'axios';
 
 export default {
     query,
+    // filterBy,
     getItemById,
     removeItem,
     addItem,
@@ -13,8 +14,9 @@ export default {
 }
 var toys = [];
 
-function query() {
-    var api = `http://localhost:3003/toy`;
+function query(filterQuery = '') {
+    console.log(filterQuery);
+    var api = `http://localhost:3003/toy?${filterQuery}`;
     return axios.get(api)
         .then(res => res.data)
         .then(loadedToys => {
@@ -23,6 +25,18 @@ function query() {
             return toys;
         });
 }
+
+// function filterBy(filterBy) {
+//     console.log(filterBy);
+//     var api = `http://localhost:3003/toy`;
+//     return axios.get(api, filterBy)
+//         .then(res => res.data)
+//         .then(loadedToys => {
+//             toys = loadedToys;
+//             // console.log(toys);
+//             return toys;
+//         });
+// }
 
 function getItemById(itemId) {
     // console.log(itemId);

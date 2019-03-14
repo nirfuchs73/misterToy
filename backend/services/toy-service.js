@@ -2,11 +2,20 @@ const mongoService = require('./mongo-service')
 
 const ObjectId = require('mongodb').ObjectId;
 
-function query() {
+function query(filterBy) {
+    console.log(filterBy);
     return mongoService.connect()
         .then(db => {
             const collection = db.collection('toys');
-            return collection.find({}).toArray();
+            if (!filterBy.name && !filterBy.type && !filterBy.inStock) {
+                return collection.find({}).toArray();
+            } else {
+                var queryToMongo = {};
+                queryToMongo.name = { '$regex': filterBy.name };
+                if (filterBy.type !== 'All') queryToMongo.type = filterBy.type;
+                if (filterBy.inStock !== 'All') queryToMongo.inStock = true;
+                return collection.find(queryToMongo).toArray();
+            }
         })
 }
 

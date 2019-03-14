@@ -7,9 +7,10 @@ function addToyRoutes(app) {
 
     // LIST
     app.get('/toy', (req, res) => {
-        toyService.query()
+        const filterBy = req.query;
+        console.log('FILTER BY', filterBy);
+        toyService.query(filterBy)
             .then(toys => res.json(toys));
-
     })
 
     // SINGLE - GET Full details

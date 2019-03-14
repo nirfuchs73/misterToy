@@ -3,7 +3,7 @@
         <!-- <h1>Toy App</h1> -->
         <h1 v-if="isToyLoading">Loading...</h1>
         <!-- <h1>Loading...</h1> -->
-        <!-- <toy-filter class="toy-app-header-item"></toy-filter> -->
+        <toy-filter class="toy-app-filter"></toy-filter>
         <toy-list v-bind:toys="toyItems" v-on:delete="deleteToy" v-on:edit="editToy"></toy-list>
         <button v-on:click="addToy">Add Toy</button>
         <user-msg></user-msg>
@@ -14,7 +14,7 @@
 // @ is an alias to /src
 // import HelloWorld from "@/components/HelloWorld.vue";
 import ToyList from "../components/ToyList.vue";
-// import ToyFilter from "@/components/ToyFilter.vue";
+import ToyFilter from "../components/ToyFilter.vue";
 import UserMsg from "../components/UserMsg.vue";
 import EventBusService, { SHOW_MSG } from "../services/EventBusService.js";
 
@@ -24,10 +24,16 @@ export default {
         return {};
     },
     created() {
-        this.$store.dispatch({ type: "loadToyItems" }).catch(err => {
-            // EventBusService.$emit(SHOW_MSG, { txt: 'Cannot Load toy, try refreshing', type: 'danger' });
-            console.log(err);
-        });
+        var filterBy = this.$store.getters.filterBy;
+        var filterQuery = `name=${filterBy.name}&type=${
+            filterBy.type
+        }&inStock=${filterBy.inStock}`;
+        this.$store
+            .dispatch({ type: "loadToyItems", filterQuery: filterQuery })
+            .catch(err => {
+                // EventBusService.$emit(SHOW_MSG, { txt: 'Cannot Load toy, try refreshing', type: 'danger' });
+                console.log(err);
+            });
     },
     computed: {
         toyItems() {
@@ -95,8 +101,8 @@ export default {
     },
     components: {
         ToyList,
-        UserMsg
-        // ToyFilter
+        UserMsg,
+        ToyFilter
     }
 };
 </script>
