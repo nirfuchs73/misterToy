@@ -13,8 +13,12 @@ function query(filterBy) {
                 var queryToMongo = {};
                 queryToMongo.name = { '$regex': filterBy.name };
                 if (filterBy.type !== 'All') queryToMongo.type = filterBy.type;
-                if (filterBy.inStock !== 'All') queryToMongo.inStock = true;
-                return collection.find(queryToMongo).toArray();
+                if (filterBy.inStock === 'true') queryToMongo.inStock = true;
+                var sortToMongo = {};
+                if (filterBy.sortBy === 'name') sortToMongo.name = 1;
+                else if (filterBy.sortBy === 'price') sortToMongo.price = 1;
+
+                return collection.find(queryToMongo).sort(sortToMongo).toArray();
             }
         })
 }

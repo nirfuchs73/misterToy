@@ -25,9 +25,8 @@ export default {
     },
     created() {
         var filterBy = this.$store.getters.filterBy;
-        var filterQuery = `name=${filterBy.name}&type=${
-            filterBy.type
-            }&inStock=${filterBy.inStock}`;
+        var sortBy = this.$store.getters.sortBy;
+        var filterQuery = `name=${filterBy.name}&type=${filterBy.type}&inStock=${filterBy.inStock}&sortBy=${sortBy}`;
         this.$store
             .dispatch({ type: 'loadToyItems', filterQuery: filterQuery })
             .catch(err => {
@@ -82,7 +81,7 @@ export default {
             var name = prompt('Name:');
             var price = +prompt('Price:');
             var type = prompt('Type:');
-            var inStock = prompt('In Stock:');
+            var inStock = confirm('In Stock?');
             var item = this.$store.getters.emptyToyItem;
             item.name = name;
             item.price = price;

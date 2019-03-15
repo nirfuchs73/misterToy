@@ -1,6 +1,6 @@
 <template>
     <div class="toy-preview flex">
-        <div v-bind:class="classObject">{{toy.name}}</div>
+        <div v-bind:class="classObject">{{toy.name}} {{toy.price}} {{toy.type}} {{toy.inStock}}</div>
     </div>
 </template>
 

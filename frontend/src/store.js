@@ -11,8 +11,9 @@ export default new Vuex.Store({
         filterBy: {
             name: '',
             type: 'All',
-            inStock: 'All'
+            inStock: false
         },
+        sortBy: 'sortBy',
         isToyLoading: false,
 
     },
@@ -37,6 +38,9 @@ export default new Vuex.Store({
         setfilterBy(state, filterBy) {
             state.filterBy = filterBy;
         },
+        setsortBy(state, sortBy) {
+            state.sortBy = sortBy;
+        },
         setIsToyLoading(state, { isLoading }) {
             state.isToyLoading = isLoading;
         }
@@ -57,6 +61,9 @@ export default new Vuex.Store({
         // },
         filterBy(state) {
             return state.filterBy;
+        },
+        sortBy(state) {
+            return state.sortBy;
         },
         toyItems(state) {
             return state.toyItems;
