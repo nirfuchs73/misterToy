@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import EventBusService, { SHOW_MSG } from "../services/EventBusService.js";
+import EventBusService, { SHOW_MSG } from '../services/EventBusService.js';
 
 export default {
     created() {

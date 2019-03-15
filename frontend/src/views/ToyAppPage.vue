@@ -12,14 +12,14 @@
 
 <script>
 // @ is an alias to /src
-// import HelloWorld from "@/components/HelloWorld.vue";
-import ToyList from "../components/ToyList.vue";
-import ToyFilter from "../components/ToyFilter.vue";
-import UserMsg from "../components/UserMsg.vue";
-import EventBusService, { SHOW_MSG } from "../services/EventBusService.js";
+// import HelloWorld from '@/components/HelloWorld.vue';
+import ToyList from '../components/ToyList.vue';
+import ToyFilter from '../components/ToyFilter.vue';
+import UserMsg from '../components/UserMsg.vue';
+import EventBusService, { SHOW_MSG } from '../services/EventBusService.js';
 
 export default {
-    name: "ToyApp",
+    name: 'ToyApp',
     data() {
         return {};
     },
@@ -27,9 +27,9 @@ export default {
         var filterBy = this.$store.getters.filterBy;
         var filterQuery = `name=${filterBy.name}&type=${
             filterBy.type
-        }&inStock=${filterBy.inStock}`;
+            }&inStock=${filterBy.inStock}`;
         this.$store
-            .dispatch({ type: "loadToyItems", filterQuery: filterQuery })
+            .dispatch({ type: 'loadToyItems', filterQuery: filterQuery })
             .catch(err => {
                 // EventBusService.$emit(SHOW_MSG, { txt: 'Cannot Load toy, try refreshing', type: 'danger' });
                 console.log(err);
@@ -45,56 +45,56 @@ export default {
     },
     methods: {
         deleteToy(itemId) {
-            console.log("deleteToy");
+            console.log('deleteToy');
             // this.$store.commit('removeItem', itemId);
             this.$store
-                .dispatch({ type: "removeItem", itemId: itemId })
+                .dispatch({ type: 'removeItem', itemId: itemId })
                 .then(() => {
                     EventBusService.$emit(SHOW_MSG, {
-                        txt: "Toy Deleted!",
-                        type: "success"
+                        txt: 'Toy Deleted!',
+                        type: 'success'
                     });
                 });
         },
         editToy(itemId) {
-            console.log("editToy");
-            this.$router.push("/toy/edit/" + itemId);
+            console.log('editToy');
+            this.$router.push('/toy/edit/' + itemId);
         },
         // toggleDone(item) {
-        //     console.log("toggleDone");
+        //     console.log('toggleDone');
         //     var toy = JSON.parse(JSON.stringify(item));
         //     toy.isDone = !toy.isDone;
         //     // this.$store.commit('toggleDone', item);
-        //     // console.log("Saving toy..", toy);
+        //     // console.log('Saving toy..', toy);
         //     this.$store
-        //         .dispatch({ type: "updateItem", item: toy })
+        //         .dispatch({ type: 'updateItem', item: toy })
         //         .then(res => {
         //             console.log(res);
         //             EventBusService.$emit(SHOW_MSG, {
-        //                 txt: "Toy Saved!",
-        //                 type: "success"
+        //                 txt: 'Toy Saved!',
+        //                 type: 'success'
         //             });
         //             // this.$router.push('/toy');
         //         });
         // },
         addToy() {
-            console.log("addToy");
-            var name = prompt("Name:");
-            var price = +prompt("Price:");
-            var type = prompt("Type:");
-            var inStock = prompt("In Stock:");
+            console.log('addToy');
+            var name = prompt('Name:');
+            var price = +prompt('Price:');
+            var type = prompt('Type:');
+            var inStock = prompt('In Stock:');
             var item = this.$store.getters.emptyToyItem;
             item.name = name;
             item.price = price;
             item.type = type;
             item.inStock = inStock;
             // this.$store.commit('addItem', { item });
-            console.log("Saving ITEM", item);
-            this.$store.dispatch({ type: "addItem", item: item }).then(res => {
+            console.log('Saving ITEM', item);
+            this.$store.dispatch({ type: 'addItem', item: item }).then(res => {
                 console.log(res);
                 EventBusService.$emit(SHOW_MSG, {
-                    txt: "Toy Added!",
-                    type: "success"
+                    txt: 'Toy Added!',
+                    type: 'success'
                 });
             });
         }

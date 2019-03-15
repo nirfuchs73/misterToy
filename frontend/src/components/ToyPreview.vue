@@ -6,8 +6,8 @@
 
 <script>
 export default {
-    name: "ToyPreview",
-    props: ["toy"],
+    name: 'ToyPreview',
+    props: ['toy'],
     created() {},
     data() {
         return {};
@@ -16,7 +16,7 @@ export default {
         classObject() {
             return {
                 done: this.toy.isDone,
-                "un-done": !this.toy.isDone
+                'un-done': !this.toy.isDone
             };
         }
     },

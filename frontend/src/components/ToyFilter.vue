@@ -32,13 +32,13 @@ export default {
     },
     methods: {
         setFilter() {
-            this.$store.commit("setfilterBy", this.filterBy);
+            this.$store.commit('setfilterBy', this.filterBy);
             var filterQuery = `name=${this.filterBy.name}&type=${
                 this.filterBy.type
             }&inStock=${this.filterBy.inStock}`;
             this.$store
                 .dispatch({
-                    type: "loadToyItems",
+                    type: 'loadToyItems',
                     filterQuery: filterQuery
                 })
                 .catch(err => {

@@ -20,35 +20,35 @@
 </template>
 
 <script>
-import UserMsg from "../components/UserMsg.vue";
-import EventBusService, { SHOW_MSG } from "../services/EventBusService.js";
+import UserMsg from '../components/UserMsg.vue';
+import EventBusService, { SHOW_MSG } from '../services/EventBusService.js';
 
 export default {
-    name: "ToyEdit",
+    name: 'ToyEdit',
     data() {
         return {};
     },
     created() {
         var itemId = this.$route.params.toyId;
         // this.$store.commit('setCurrItem', toyId);
-        this.$store.dispatch({ type: "loadToyItem", itemId });
+        this.$store.dispatch({ type: 'loadToyItem', itemId });
         // console.log(toyId);
     },
-    mounted() {},
+    mounted() { },
     methods: {
         saveToy() {
-            console.log("Saving toy..", this.toy);
+            console.log('Saving toy..', this.toy);
             // this.$store.commit('updateItem', this.toy);
             // console.log('Saving ITEM', item);
             this.$store
-                .dispatch({ type: "updateItem", item: this.toy })
+                .dispatch({ type: 'updateItem', item: this.toy })
                 .then(res => {
                     console.log(res);
                     EventBusService.$emit(SHOW_MSG, {
-                        txt: "Toy Saved!",
-                        type: "success"
+                        txt: 'Toy Saved!',
+                        type: 'success'
                     });
-                    this.$router.push("/toy");
+                    this.$router.push('/toy');
                 });
         }
     },

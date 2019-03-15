@@ -12,7 +12,7 @@
 
 <script>
 export default {
-    name: "ToyDetails",
+    name: 'ToyDetails',
 
     data() {
         return {};
@@ -20,7 +20,7 @@ export default {
     created() {
         var itemId = this.$route.params.toyId;
         // this.$store.commit('setCurrItem', toyId);
-        this.$store.dispatch({ type: "loadToyItem", itemId });
+        this.$store.dispatch({ type: 'loadToyItem', itemId });
         // console.log(toyId);
     },
     mounted() {},
@@ -28,7 +28,7 @@ export default {
     computed: {
         formattedDate() {
             return moment(this.toy.createdAt).format(
-                "MMMM Do YYYY, h:mm:ss a"
+                'MMMM Do YYYY, h:mm:ss a'
             );
         },
         toy() {

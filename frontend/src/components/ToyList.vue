@@ -22,11 +22,11 @@
 </template>
 
 <script>
-import ToyPreview from "../components/ToyPreview.vue";
+import ToyPreview from '../components/ToyPreview.vue';
 
 export default {
-    name: "ToyList",
-    props: ["toys"],
+    name: 'ToyList',
+    props: ['toys'],
     created() {},
     data() {
         return {};
@@ -41,13 +41,13 @@ export default {
     },
     methods: {
         deleteToy(toy) {
-            this.$emit("delete", toy._id);
+            this.$emit('delete', toy._id);
         },
         editToy(toy) {
-            this.$emit("edit", toy._id);
+            this.$emit('edit', toy._id);
         }
         // toggleDone(toy) {
-        //     this.$emit("toggle-done", toy);
+        //     this.$emit('toggle-done', toy);
         // }
     },
     components: {
