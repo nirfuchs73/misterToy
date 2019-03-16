@@ -5,6 +5,7 @@ import About from './views/About.vue';
 import ToyAppPage from './views/ToyAppPage.vue';
 import ToyDetails from './views/ToyDetails.vue';
 import ToyEdit from './views/ToyEdit.vue';
+import ToyAdd from './views/ToyAdd.vue';
 
 Vue.use(Router)
 
@@ -13,6 +14,7 @@ export default new Router({
     { path: '/', name: 'home', component: Home },
     { path: '/about', name: 'about', component: About },
     { path: '/toy', component: ToyAppPage },
+    { path: '/toy/edit', component: ToyAdd },
     { path: '/toy/edit/:toyId', component: ToyEdit },
     { path: '/toy/:toyId', component: ToyDetails }
     // route level code-splitting

@@ -1,7 +1,7 @@
 <template>
-    <section v-if="toy">
-        <h1>{{(toy._id)? 'Toy Edit' : 'Toy Add'}}</h1>
-        <form v-on:submit.prevent="saveToy" class="toy-edit flex">
+    <section>
+        <h1>Toy Add</h1>
+        <form v-on:submit.prevent="saveToy" class="toy-add flex">
             <label>Name:</label>
             <input type="text" v-model="toy.name">
             <label>Price:</label>
@@ -29,15 +29,14 @@ import UserMsg from '../components/UserMsg.vue';
 import EventBusService, { SHOW_MSG } from '../services/EventBusService.js';
 
 export default {
-    name: 'ToyEdit',
+    name: 'ToyAdd',
     data() {
         return {};
     },
     created() {
-        var itemId = this.$route.params.toyId;
-        // this.$store.commit('setCurrItem', toyId);
-        this.$store.dispatch({ type: 'loadToyItem', itemId });
-        // console.log(toyId);
+        var toyItem = this.$store.getters.emptyToyItem;
+        this.$store.commit('setToyItem', { toyItem });
+        // console.log(this.$store.state.currItem);
     },
     mounted() { },
     methods: {
@@ -45,19 +44,19 @@ export default {
             console.log('Saving toy..', this.toy);
             // this.$store.commit('updateItem', this.toy);
             // console.log('Saving ITEM', item);
-            this.$store.dispatch({ type: 'updateItem', item: this.toy })
+            this.$store.dispatch({ type: 'addItem', item: this.toy })
                 .then(res => {
                     console.log(res);
-                    EventBusService.$emit(SHOW_MSG, { txt: 'Toy Saved!', type: 'success' });
+                    EventBusService.$emit(SHOW_MSG, { txt: 'Toy Added!', type: 'success' });
                     this.$router.push('/toy');
                 });
         }
     },
     computed: {
-        toy: {
-            // return JSON.parse(JSON.stringify(this.$store.state.currItem));
-            get() { return this.$store.getters.currItem },
-            set(toyItem) { this.$store.commit('setToyItem', { toyItem }) }
+        toy() {
+            return JSON.parse(JSON.stringify(this.$store.state.currItem));
+            // get() { return this.$store.getters.currItem },
+            // set(toyItem) { this.$store.commit('setToyItem', { toyItem }) }
         }
     },
     components: {
@@ -71,7 +70,7 @@ export default {
     display: flex;
 }
 
-.toy-edit {
+.toy-add {
     flex-direction: column;
     width: min-content;
 }

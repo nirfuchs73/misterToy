@@ -49,53 +49,33 @@ export default {
             this.$store
                 .dispatch({ type: 'removeItem', itemId: itemId })
                 .then(() => {
-                    EventBusService.$emit(SHOW_MSG, {
-                        txt: 'Toy Deleted!',
-                        type: 'success'
-                    });
+                    EventBusService.$emit(SHOW_MSG, { txt: 'Toy Deleted!', type: 'success' });
                 });
         },
         editToy(itemId) {
             console.log('editToy');
             this.$router.push('/toy/edit/' + itemId);
         },
-        // toggleDone(item) {
-        //     console.log('toggleDone');
-        //     var toy = JSON.parse(JSON.stringify(item));
-        //     toy.isDone = !toy.isDone;
-        //     // this.$store.commit('toggleDone', item);
-        //     // console.log('Saving toy..', toy);
-        //     this.$store
-        //         .dispatch({ type: 'updateItem', item: toy })
-        //         .then(res => {
-        //             console.log(res);
-        //             EventBusService.$emit(SHOW_MSG, {
-        //                 txt: 'Toy Saved!',
-        //                 type: 'success'
-        //             });
-        //             // this.$router.push('/toy');
-        //         });
-        // },
         addToy() {
             console.log('addToy');
-            var name = prompt('Name:');
-            var price = +prompt('Price:');
-            var type = prompt('Type:');
-            var inStock = confirm('In Stock?');
-            var item = this.$store.getters.emptyToyItem;
-            item.name = name;
-            item.price = price;
-            item.type = type;
-            item.inStock = inStock;
-            // this.$store.commit('addItem', { item });
-            console.log('Saving ITEM', item);
-            this.$store.dispatch({ type: 'addItem', item: item }).then(res => {
-                console.log(res);
-                EventBusService.$emit(SHOW_MSG, {
-                    txt: 'Toy Added!',
-                    type: 'success'
-                });
-            });
+            this.$router.push('/toy/edit/');
+
+            // var name = prompt('Name:');
+            // var price = +prompt('Price:');
+            // var type = prompt('Type:');
+            // var inStock = confirm('In Stock?');
+            // var item = this.$store.getters.emptyToyItem;
+            // item.name = name;
+            // item.price = price;
+            // item.type = type;
+            // item.inStock = inStock;
+            // // this.$store.commit('addItem', { item });
+            // console.log('Saving ITEM', item);
+            // this.$store.dispatch({ type: 'addItem', item: item })
+            //     .then(res => {
+            //         console.log(res);
+            //         EventBusService.$emit(SHOW_MSG, { txt: 'Toy Added!', type: 'success' });
+            //     });
         }
     },
     components: {

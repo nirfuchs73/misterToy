@@ -59,6 +59,9 @@ export default new Vuex.Store({
         //     return toyList;
         //     // return state.toyItems;
         // },
+        currItem(state) {
+            return state.currItem;
+        },
         filterBy(state) {
             return state.filterBy;
         },

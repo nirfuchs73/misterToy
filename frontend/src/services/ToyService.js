@@ -1,11 +1,7 @@
-// import UtilService from './UtilService.js';
-// import StorageService from './StorageService.js';
-// const TODOS_KEY = 'toys';
 import axios from 'axios';
 
 export default {
     query,
-    // filterBy,
     getItemById,
     removeItem,
     addItem,
@@ -25,18 +21,6 @@ function query(filterQuery = '') {
             return toys;
         });
 }
-
-// function filterBy(filterBy) {
-//     console.log(filterBy);
-//     var api = `http://localhost:3003/toy`;
-//     return axios.get(api, filterBy)
-//         .then(res => res.data)
-//         .then(loadedToys => {
-//             toys = loadedToys;
-//             // console.log(toys);
-//             return toys;
-//         });
-// }
 
 function getItemById(itemId) {
     // console.log(itemId);
@@ -80,7 +64,7 @@ function getEmpty() {
         name: '',
         price: 0,
         type: '',
-        createdAt: Date.now(),
+        createdAt: new Date(),
         inStock: false
     }
 }
