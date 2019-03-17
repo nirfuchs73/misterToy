@@ -58,7 +58,7 @@ export default {
         },
         addToy() {
             console.log('addToy');
-            this.$router.push('/toy/edit/');
+            this.$router.push('/toy/edit');
 
             // var name = prompt('Name:');
             // var price = +prompt('Price:');

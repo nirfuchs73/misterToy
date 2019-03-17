@@ -18,7 +18,7 @@ function query(filterBy) {
                 if (filterBy.sortBy === 'name') sortToMongo.name = 1;
                 else if (filterBy.sortBy === 'price') sortToMongo.price = 1;
 
-                return collection.find(queryToMongo).sort(sortToMongo).toArray();
+                return collection.find(queryToMongo).collation({ locale: 'en' }).sort(sortToMongo).toArray();
             }
         })
 }
