@@ -6,12 +6,14 @@ import ToyAppPage from './views/ToyAppPage.vue';
 import ToyDetails from './views/ToyDetails.vue';
 import ToyEdit from './views/ToyEdit.vue';
 import ToyAdd from './views/ToyAdd.vue';
+import Login from './views/Login.vue';
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     { path: '/', name: 'home', component: Home },
+    { path: '/login', name: 'login', component: Login },
     { path: '/about', name: 'about', component: About },
     { path: '/toy', component: ToyAppPage },
     { path: '/toy/edit', component: ToyAdd },

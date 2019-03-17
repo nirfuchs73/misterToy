@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import ItemService from '@/services/ToyService.js';
+import UserService from '@/services/UserService.js';
 
 Vue.use(Vuex)
 
@@ -15,7 +16,9 @@ export default new Vuex.Store({
         },
         sortBy: 'sortBy',
         isToyLoading: false,
-
+        currUser: {
+            nickname: 'admin'
+        }
     },
     mutations: {
         setToyItems(state, payload) {
@@ -43,6 +46,9 @@ export default new Vuex.Store({
         },
         setIsToyLoading(state, { isLoading }) {
             state.isToyLoading = isLoading;
+        },
+        setCurrUser(state, { currUser }) {
+            state.currUser = currUser;
         }
     },
     getters: {
@@ -81,6 +87,9 @@ export default new Vuex.Store({
         isToyLoading(state) {
             return state.isToyLoading;
         },
+        currUser(state) {
+            return state.currUser;
+        }
     },
     actions: {
         loadToyItems(context, { filterQuery }) {
@@ -130,5 +139,18 @@ export default new Vuex.Store({
                     context.commit({ type: 'updateItem', item: savedItem });
                 })
         },
+        login(context, { user }) {
+            console.log('user', user);
+            return UserService.login(user)
+                .then((user) => {
+                    context.commit({ type: 'setCurrUser', currUser: user });
+                })
+        },
+        logout(context, { user }) {
+            return UserService.logOut()
+                .then(res => {
+                    context.commit({ type: 'setCurrUser', currUser: user });
+                });
+        }
     }
 })

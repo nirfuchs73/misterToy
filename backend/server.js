@@ -6,7 +6,7 @@ const session = require('express-session');
 
 const addToyRoutes = require('./routes/toy-route');
 // const addReviewRoutes = require('./routes/review-route');
-// const addUserRoutes = require('./routes/user-route');
+const addUserRoutes = require('./routes/user-route');
 
 const app = express();
 app.use(cors({
@@ -27,8 +27,8 @@ app.get('/', (req, res) => {
 });
 
 addToyRoutes(app);
-// addReviewRoutes(app)
-// addUserRoutes(app)
+// addReviewRoutes(app);
+addUserRoutes(app);
 
 const PORT = process.env.PORT || 3003;
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}`));

@@ -2,10 +2,12 @@
     <section class="toy-app toy-wrapper">
         <!-- <h1>Toy App</h1> -->
         <h1 v-if="isToyLoading">Loading...</h1>
-        <!-- <h1>Loading...</h1> -->
+        <span>User: {{currUser.nickname}}</span>
+        <button v-on:click="logout">Logout</button>
         <toy-filter class="toy-app-filter"></toy-filter>
         <toy-list v-bind:toys="toyItems" v-on:delete="deleteToy" v-on:edit="editToy"></toy-list>
         <button v-on:click="addToy">Add Toy</button>
+
         <user-msg></user-msg>
     </section>
 </template>
@@ -40,14 +42,16 @@ export default {
         },
         isToyLoading() {
             return this.$store.getters.isToyLoading;
+        },
+        currUser() {
+            return this.$store.getters.currUser;
         }
     },
     methods: {
         deleteToy(itemId) {
             console.log('deleteToy');
             // this.$store.commit('removeItem', itemId);
-            this.$store
-                .dispatch({ type: 'removeItem', itemId: itemId })
+            this.$store.dispatch({ type: 'removeItem', itemId: itemId })
                 .then(() => {
                     EventBusService.$emit(SHOW_MSG, { txt: 'Toy Deleted!', type: 'success' });
                 });
@@ -59,23 +63,13 @@ export default {
         addToy() {
             console.log('addToy');
             this.$router.push('/toy/edit');
-
-            // var name = prompt('Name:');
-            // var price = +prompt('Price:');
-            // var type = prompt('Type:');
-            // var inStock = confirm('In Stock?');
-            // var item = this.$store.getters.emptyToyItem;
-            // item.name = name;
-            // item.price = price;
-            // item.type = type;
-            // item.inStock = inStock;
-            // // this.$store.commit('addItem', { item });
-            // console.log('Saving ITEM', item);
-            // this.$store.dispatch({ type: 'addItem', item: item })
-            //     .then(res => {
-            //         console.log(res);
-            //         EventBusService.$emit(SHOW_MSG, { txt: 'Toy Added!', type: 'success' });
-            //     });
+        },
+        logout() {
+            console.log('logout');
+            this.$store.dispatch({ type: 'logout', user: this.currUser })
+                .then(() => {
+                    this.$router.push('/login');
+                });
         }
     },
     components: {
@@ -94,5 +88,9 @@ export default {
     max-width: 1000px;
     padding: 0 20px;
     margin: 0 auto;
+}
+
+.flex {
+    display: flex;
 }
 </style>
