@@ -35,7 +35,11 @@ export default {
     },
     computed: {
         user: {
-            get() { return this.$store.getters.currUser },
+            get() {
+                var currUser = this.$store.getters.currUser;
+                if (currUser) return this.$store.getters.currUser;
+                return { nickname: '' };
+            },
             set(value) { this.$store.commit('setCurrUser', value) }
         }
     },

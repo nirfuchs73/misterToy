@@ -37,7 +37,7 @@ function addUserRoutes(app) {
                     res.json(user)
                 } else {
                     console.log('BACKEND service ERROR');
-                    res.status(404).send('User not Found');
+                    res.status(400).send('User not Found');
                 }
             })
     })

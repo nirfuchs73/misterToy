@@ -1,5 +1,5 @@
 <template>
-    <section class="toy-app toy-wrapper">
+    <section v-if="currUser" class="toy-app toy-wrapper">
         <!-- <h1>Toy App</h1> -->
         <h1 v-if="isToyLoading">Loading...</h1>
         <span>User: {{currUser.nickname}}</span>
@@ -26,15 +26,20 @@ export default {
         return {};
     },
     created() {
-        var filterBy = this.$store.getters.filterBy;
-        var sortBy = this.$store.getters.sortBy;
-        var filterQuery = `name=${filterBy.name}&type=${filterBy.type}&inStock=${filterBy.inStock}&sortBy=${sortBy}`;
-        this.$store
-            .dispatch({ type: 'loadToyItems', filterQuery: filterQuery })
-            .catch(err => {
-                // EventBusService.$emit(SHOW_MSG, { txt: 'Cannot Load toy, try refreshing', type: 'danger' });
-                console.log(err);
-            });
+        var currUser = this.$store.getters.currUser;
+        if (currUser) {
+            var filterBy = this.$store.getters.filterBy;
+            var sortBy = this.$store.getters.sortBy;
+            var filterQuery = `name=${filterBy.name}&type=${filterBy.type}&inStock=${filterBy.inStock}&sortBy=${sortBy}`;
+            this.$store
+                .dispatch({ type: 'loadToyItems', filterQuery: filterQuery })
+                .catch(err => {
+                    // EventBusService.$emit(SHOW_MSG, { txt: 'Cannot Load toy, try refreshing', type: 'danger' });
+                    console.log(err);
+                });
+        } else {
+            this.$router.push('/login');
+        }
     },
     computed: {
         toyItems() {

@@ -149,7 +149,7 @@ export default new Vuex.Store({
         logout(context, { user }) {
             return UserService.logOut()
                 .then(res => {
-                    context.commit({ type: 'setCurrUser', currUser: user });
+                    context.commit({ type: 'setCurrUser', currUser: null });
                 });
         }
     }
