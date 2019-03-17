@@ -1,6 +1,14 @@
 const toyService = require('../services/toy-service.js');
 // const reviewService = require('../services/review-service.js')
 
+function checkAdmin(req, res, next) {
+    console.log('INSIDE MIDDLEWARE: ', req.session.user);
+    if (!req.session.user || !req.session.user.isAdmin) {
+        res.status(401).end('Unauthorized');
+        return;
+    }
+    next();
+}
 
 function addToyRoutes(app) {
     // TOYS REST API:
@@ -25,7 +33,7 @@ function addToyRoutes(app) {
     })
 
     // DELETE
-    app.delete('/toy/:toyId', (req, res) => {
+    app.delete('/toy/:toyId', checkAdmin, (req, res) => {
         const toyId = req.params.toyId;
         toyService.remove(toyId)
             .then(() => res.end())
@@ -35,7 +43,7 @@ function addToyRoutes(app) {
     })
 
     // CREATE
-    app.post('/toy', (req, res) => {
+    app.post('/toy', checkAdmin, (req, res) => {
         const toy = req.body;
         toyService.add(toy)
             .then(toy => res.json(toy))
@@ -45,7 +53,7 @@ function addToyRoutes(app) {
     })
 
     // UPDATE
-    app.put('/toy/:toyId', (req, res) => {
+    app.put('/toy/:toyId', checkAdmin, (req, res) => {
         const toy = req.body;
         toyService.update(toy)
             .then(toy => res.json(toy))

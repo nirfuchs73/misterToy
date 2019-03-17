@@ -6,8 +6,7 @@
         <button v-on:click="logout">Logout</button>
         <toy-filter class="toy-app-filter"></toy-filter>
         <toy-list v-bind:toys="toyItems" v-on:delete="deleteToy" v-on:edit="editToy"></toy-list>
-        <button v-on:click="addToy">Add Toy</button>
-
+        <button v-if="currUser.isAdmin" v-on:click="addToy">Add Toy</button>
         <user-msg></user-msg>
     </section>
 </template>
@@ -59,6 +58,10 @@ export default {
             this.$store.dispatch({ type: 'removeItem', itemId: itemId })
                 .then(() => {
                     EventBusService.$emit(SHOW_MSG, { txt: 'Toy Deleted!', type: 'success' });
+                })
+                .catch(err => {
+                    console.log(err);
+                    this.$router.push('/toy');
                 });
         },
         editToy(itemId) {

@@ -32,8 +32,7 @@ function addUserRoutes(app) {
         userService.checkLogin({ nickname })
             .then(user => {
                 if (user) {
-                    console.log('user', user);
-                    req.session.user = user
+                    req.session.user = user;
                     res.json(user)
                 } else {
                     console.log('BACKEND service ERROR');

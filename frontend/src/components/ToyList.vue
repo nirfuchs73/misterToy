@@ -13,9 +13,8 @@
         >
             <toy-preview class="toy-list-preview" v-bind:toy="currToy"></toy-preview>
             <div class="toy-list-buttons flex">
-                <button v-on:click.stop.prevent="deleteToy(currToy)">Delete</button>
-                <button v-on:click.stop.prevent="editToy(currToy)">Edit</button>
-                <!-- <button v-on:click.stop.prevent="toggleDone(currToy)">Done</button> -->
+                <button v-if="currUser.isAdmin" v-on:click.stop.prevent="deleteToy(currToy)">Delete</button>
+                <button v-if="currUser.isAdmin" v-on:click.stop.prevent="editToy(currToy)">Edit</button>
             </div>
         </router-link>
     </section>
@@ -27,17 +26,14 @@ import ToyPreview from '../components/ToyPreview.vue';
 export default {
     name: 'ToyList',
     props: ['toys'],
-    created() {},
+    created() { },
     data() {
         return {};
     },
     computed: {
-        // cartItemsCount() {
-        //     return this.$store.getters.cartItemsCount
-        // },
-        // isCartOpen() {
-        //     return this.$store.state.isCartOpen
-        // }
+        currUser() {
+            return this.$store.getters.currUser;
+        }
     },
     methods: {
         deleteToy(toy) {
@@ -46,9 +42,6 @@ export default {
         editToy(toy) {
             this.$emit('edit', toy._id);
         }
-        // toggleDone(toy) {
-        //     this.$emit('toggle-done', toy);
-        // }
     },
     components: {
         ToyPreview

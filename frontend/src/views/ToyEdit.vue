@@ -50,6 +50,10 @@ export default {
                     console.log(res);
                     EventBusService.$emit(SHOW_MSG, { txt: 'Toy Saved!', type: 'success' });
                     this.$router.push('/toy');
+                })
+                .catch(err => {
+                    console.log(err);
+                    this.$router.push('/toy');
                 });
         }
     },

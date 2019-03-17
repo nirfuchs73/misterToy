@@ -1,4 +1,6 @@
-import axios from 'axios';
+// import axios from 'axios';
+import Axios from 'axios';
+var axios = Axios.create({ withCredentials: true });
 
 export default {
     query,
