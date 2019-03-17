@@ -28,13 +28,17 @@ function addUserRoutes(app) {
     })
 
     app.put('/login', (req, res) => {
-        console.log('login');
         const nickname = req.body.nickname
-        console.log('nickname', nickname);
         userService.checkLogin({ nickname })
             .then(user => {
-                req.session.user = user
-                res.json(user)
+                if (user) {
+                    console.log('user', user);
+                    req.session.user = user
+                    res.json(user)
+                } else {
+                    console.log('BACKEND service ERROR');
+                    res.status(404).send('User not Found');
+                }
             })
     })
 

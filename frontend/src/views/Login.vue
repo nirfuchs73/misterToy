@@ -25,6 +25,11 @@ export default {
                     console.log(res);
                     // EventBusService.$emit(SHOW_MSG, { txt: 'Toy Added!', type: 'success' });
                     this.$router.push('/toy');
+                })
+                .catch(err => {
+                    console.log(err);
+                    console.log('User not exist');
+                    this.$router.push('/login');
                 });
         }
     },
