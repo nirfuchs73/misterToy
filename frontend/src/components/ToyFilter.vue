@@ -17,8 +17,8 @@
         <!-- <select v-model="filterBy.inStock" v-on:change="setFilter">
             <option value="All" selected>All</option>
             <option value="InStock">In stock</option>
-        </select> -->
-         <!-- <label>Sort By:</label> -->
+        </select>-->
+        <!-- <label>Sort By:</label> -->
         <select v-model="sortBy" v-on:change="setFilter">
             <option value="sortBy" selected>Sort By</option>
             <option value="name">Name</option>
@@ -33,17 +33,19 @@ export default {
         return {};
     },
     computed: {
-        filterBy() {
-            return JSON.parse(JSON.stringify(this.$store.getters.filterBy));
+        filterBy: {
+            // return JSON.parse(JSON.stringify(this.$store.getters.filterBy));
+            get() { return this.$store.getters.filterBy },
+            set(value) { this.$store.commit('setfilterBy', { filterBy: value }) }
         },
         sortBy: {
             get() { return this.$store.getters.sortBy },
-            set(value) { this.$store.commit('setsortBy', value) }
+            set(value) { this.$store.commit('setsortBy', { sortBy: value }) }
         }
     },
     methods: {
         setFilter() {
-            this.$store.commit('setfilterBy', this.filterBy);
+            // this.$store.commit('setfilterBy', this.filterBy);
 
             var filterQuery =
                 `name=${this.filterBy.name}&type=${this.filterBy.type}&inStock=${this.filterBy.inStock}&sortBy=${this.sortBy}`;

@@ -18,6 +18,11 @@ export default new Vuex.Store({
         isToyLoading: false,
         currUser: {
             nickname: 'admin'
+        },
+        currReview: {
+            userId: '',
+            toyId: '',
+            content: ''
         }
     },
     mutations: {
@@ -38,10 +43,10 @@ export default new Vuex.Store({
             const idx = state.toyItems.findIndex(currItem => currItem._id === item._id);
             state.toyItems.splice(idx, 1, item);
         },
-        setfilterBy(state, filterBy) {
+        setfilterBy(state, { filterBy }) {
             state.filterBy = filterBy;
         },
-        setsortBy(state, sortBy) {
+        setsortBy(state, { sortBy }) {
             state.sortBy = sortBy;
         },
         setIsToyLoading(state, { isLoading }) {
@@ -49,6 +54,9 @@ export default new Vuex.Store({
         },
         setCurrUser(state, { currUser }) {
             state.currUser = currUser;
+        },
+        setCurrReview(state, { review }) {
+            state.currReview = review;
         }
     },
     getters: {
@@ -89,6 +97,9 @@ export default new Vuex.Store({
         },
         currUser(state) {
             return state.currUser;
+        },
+        currReview(state) {
+            return state.currReview;
         }
     },
     actions: {

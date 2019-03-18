@@ -40,7 +40,7 @@ export default {
                 if (currUser) return this.$store.getters.currUser;
                 return { nickname: '' };
             },
-            set(value) { this.$store.commit('setCurrUser', value) }
+            set(value) { this.$store.commit('setCurrUser', { currUser: value }) }
         }
     },
     components: {

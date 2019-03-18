@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
 const addToyRoutes = require('./routes/toy-route');
-// const addReviewRoutes = require('./routes/review-route');
+const addReviewRoutes = require('./routes/review-route');
 const addUserRoutes = require('./routes/user-route');
 
 const app = express();
@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
 });
 
 addToyRoutes(app);
-// addReviewRoutes(app);
+addReviewRoutes(app);
 addUserRoutes(app);
 
 const PORT = process.env.PORT || 3003;
